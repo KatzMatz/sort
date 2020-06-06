@@ -1,36 +1,5 @@
 package sort
 
-func MergeSortInt(array []int) []int {
-	var size int = len(array)
-
-	if size > 1 {
-		// Split part
-		var mid_idx int = size / 2
-		var left_arr []int = MergeSortInt(array[:mid_idx])
-		var right_arr []int = MergeSortInt(array[mid_idx:])
-
-		// Merge part
-		var sorted []int = make([]int, size)
-		var left_idx int = 0
-		var right_idx int = 0
-
-		for i := 0; i < size; i++ {
-			if (right_idx == size-mid_idx) || (left_idx < mid_idx && left_arr[left_idx] <= right_arr[right_idx]) {
-				sorted[i] = left_arr[left_idx]
-				left_idx++
-			} else {
-				sorted[i] = right_arr[right_idx]
-				right_idx++
-			}
-		}
-		return sorted
-
-	} else {
-		return array
-	}
-
-}
-
 func QuickSortInt(array []int) []int {
 	var size int = len(array)
 	if size > 1 {
