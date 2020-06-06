@@ -5,22 +5,6 @@ import (
 	"time"
 )
 
-func BubbleSortInt(array []int) []int {
-	var n int = len(array)
-	sorted := make([]int, n)
-	copy(sorted, array)
-
-	for i := 0; i < n-1; i++ {
-		for j := 0; j < n-1-i; j++ {
-			if sorted[j] > sorted[j+1] {
-				sorted[j], sorted[j+1] = sorted[j+1], sorted[j]
-			}
-		}
-	}
-
-	return sorted
-}
-
 func InsertionSortInt(array []int) []int {
 	var size int = len(array)
 	var sorted []int = make([]int, size)
