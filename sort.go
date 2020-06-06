@@ -42,26 +42,6 @@ func ShellSortInt(array []int) []int {
 	return sorted
 }
 
-func SelectionSortInt(array []int) []int {
-	var size int = len(array)
-	var sorted []int = make([]int, size)
-	copy(sorted, array)
-	var min_idx int = 0
-	for i := 0; i < size; i++ {
-		min_idx = i
-		for j := i + 1; j < size; j++ {
-			if sorted[min_idx] > sorted[j] {
-				min_idx = j
-			}
-		}
-		if min_idx != i {
-			sorted[i], sorted[min_idx] = sorted[min_idx], sorted[i]
-		}
-	}
-
-	return sorted
-}
-
 func MergeSortInt(array []int) []int {
 	var size int = len(array)
 
