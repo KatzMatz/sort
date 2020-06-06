@@ -33,7 +33,7 @@ func BubbleSortIntDsc(slice []int) []int {
 
 	for i := 0; i < n-1; i++ {
 		for j := 0; j < n-1-i; j++ {
-			if slice[j] > slice[j+1] {
+			if slice[j] < slice[j+1] {
 				slice[j], slice[j+1] = slice[j+1], slice[j]
 			}
 		}
@@ -71,7 +71,7 @@ func BubbleSortFloat64Dsc(slice []float64) []float64 {
 
 	for i := 0; i < n-1; i++ {
 		for j := 0; j < n-1-i; j++ {
-			if slice[j] > slice[j+1] {
+			if slice[j] < slice[j+1] {
 				slice[j], slice[j+1] = slice[j+1], slice[j]
 			}
 		}
