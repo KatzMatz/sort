@@ -1,20 +1,5 @@
 package sort
 
-func InsertionSortInt(array []int) []int {
-	var size int = len(array)
-	var sorted []int = make([]int, size)
-	copy(sorted, array)
-	var key int = 0
-	for i := 1; i < size; i++ {
-		key = i
-		for (key > 0) && (sorted[key] < sorted[key-1]) {
-			sorted[key], sorted[key-1] = sorted[key-1], sorted[key]
-			key--
-		}
-	}
-	return sorted
-}
-
 func ShellSortInt(array []int) []int {
 	var size = len(array)
 	var sorted []int = make([]int, size)
