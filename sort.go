@@ -1,27 +1,5 @@
 package sort
 
-func ShellSortInt(array []int) []int {
-	var size = len(array)
-	var sorted []int = make([]int, size)
-	copy(sorted, array)
-
-	// decide h
-	var h int = 1
-	for h < (size / 9) {
-		h = 3*h + 1
-	}
-
-	for ; h > 0; h = h / 3 {
-		for i := 1; i < size; i++ {
-			for key := i; (key >= h) && (sorted[key] < sorted[key-h]); key = key - h {
-				sorted[key], sorted[key-h] = sorted[key-h], sorted[key]
-			}
-		}
-	}
-
-	return sorted
-}
-
 func MergeSortInt(array []int) []int {
 	var size int = len(array)
 
