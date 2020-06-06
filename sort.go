@@ -1,34 +1,5 @@
 package sort
 
-func QuickSortInt(array []int) []int {
-	var size int = len(array)
-	if size > 1 {
-		var sorted []int = make([]int, size)
-
-		var pivot int = array[0]
-		var left []int
-		var right []int
-
-		for _, item := range array[1:] {
-			if item <= pivot {
-				left = append(left, item)
-			} else {
-				right = append(right, item)
-			}
-		}
-		left = QuickSortInt(left)
-		right = QuickSortInt(right)
-
-		sorted = append(left, pivot)
-		sorted = append(sorted, right...)
-
-		return sorted
-	} else {
-		return array
-	}
-
-}
-
 func HeapSortInt(array []int) []int {
 	var size int = len(array)
 	// var i int = (size / 2) - 1
