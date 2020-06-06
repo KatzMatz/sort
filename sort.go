@@ -1,10 +1,5 @@
 package sort
 
-import (
-	"math/rand"
-	"time"
-)
-
 func InsertionSortInt(array []int) []int {
 	var size int = len(array)
 	var sorted []int = make([]int, size)
@@ -78,7 +73,6 @@ func QuickSortInt(array []int) []int {
 	if size > 1 {
 		var sorted []int = make([]int, size)
 
-		rand.Seed(time.Now().UnixNano())
 		var pivot int = array[0]
 		var left []int
 		var right []int
