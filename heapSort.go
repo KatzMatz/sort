@@ -4,90 +4,69 @@ import (
 	"strings"
 )
 
-func HeapSortInt(slice []int, ascOrDsc string) []int {
+func HeapSortInt(slice []int, ascOrDsc string) bool {
 	if strings.EqualFold("asc", ascOrDsc) {
-		return HeapSortIntAsc(slice)
+		HeapSortIntAsc(slice)
+		return true
 	} else if strings.EqualFold("dsc", ascOrDsc) {
-		return reverseSliceInt(HeapSortIntAsc(slice))
+		HeapSortIntDsc(slice)
+		return true
 	} else {
-		return nil
+		return false
 	}
 }
 
-func HeapSortIntAsc(slice []int) []int {
-	var size int = len(slice)
+func HeapSortIntAsc(slice []int) {
+	HeapSortAsc(IntSlice(slice))
+}
+
+func HeapSortIntDsc(slice []int) {
+	HeapSortAsc(IntSlice(slice))
+	reverseSliceInt(slice)
+}
+
+func HeapSortFloat64(slice []float64, ascOrDsc string) bool {
+	if strings.EqualFold("asc", ascOrDsc) {
+		HeapSortFloat64Asc(slice)
+		return true
+	} else if strings.EqualFold("dsc", ascOrDsc) {
+		HeapSortFloat64Dsc(slice)
+		return true
+	} else {
+		return false
+	}
+}
+
+func HeapSortFloat64Asc(slice []float64) {
+	HeapSortAsc(Float64Slice(slice))
+}
+
+func HeapSortFloat64Dsc(slice []float64) {
+	HeapSortAsc(Float64Slice(slice))
+	reverseSliceFloat64(slice)
+}
+
+func HeapSortAsc(data SortInterface) {
+	var size int = data.Len()
 	var maxIdx int = 0
 
 	for unsortedLength := size; unsortedLength > 1; unsortedLength-- {
 		// build heap tree
 		for i := (int(unsortedLength/2) - 1); i >= 0; i-- {
 			maxIdx = i
-			if slice[maxIdx] < slice[2*i+1] {
+			if data.Less(maxIdx, 2*i+1) {
 				maxIdx = 2*i + 1
 			}
-			if (unsortedLength > 2*i+2) && slice[maxIdx] < slice[2*i+2] {
+			if (unsortedLength > 2*i+2) && data.Less(maxIdx, 2*i+2) {
 				maxIdx = 2*i + 2
 			}
 
 			if maxIdx != i {
-				slice[i], slice[maxIdx] = slice[maxIdx], slice[i]
+				data.Swap(i, maxIdx)
 			}
 		}
 
 		// swap root and end of slice
-		slice[0], slice[unsortedLength-1] = slice[unsortedLength-1], slice[0]
+		data.Swap(0, unsortedLength-1)
 	}
-	return slice
-}
-
-func reverseSliceInt(slice []int) []int {
-	var size int = len(slice)
-	for i := 0; i < int(size/2); i++ {
-		slice[i], slice[size-i-1] = slice[size-i-1], slice[i]
-	}
-	return slice
-}
-
-func HeapSortFloat64(slice []float64, ascOrDsc string) []float64 {
-	if strings.EqualFold("asc", ascOrDsc) {
-		return HeapSortFloat64Asc(slice)
-	} else if strings.EqualFold("dsc", ascOrDsc) {
-		return reverseSliceFloat64(HeapSortFloat64Asc(slice))
-	} else {
-		return nil
-	}
-}
-
-func HeapSortFloat64Asc(slice []float64) []float64 {
-	var size int = len(slice)
-	var maxIdx int = 0
-
-	for unsortedLength := size; unsortedLength > 1; unsortedLength-- {
-		// build heap tree
-		for i := (int(unsortedLength/2) - 1); i >= 0; i-- {
-			maxIdx = i
-			if slice[maxIdx] < slice[2*i+1] {
-				maxIdx = 2*i + 1
-			}
-			if (unsortedLength > 2*i+2) && slice[maxIdx] < slice[2*i+2] {
-				maxIdx = 2*i + 2
-			}
-
-			if maxIdx != i {
-				slice[i], slice[maxIdx] = slice[maxIdx], slice[i]
-			}
-		}
-
-		// swap root and end of slice
-		slice[0], slice[unsortedLength-1] = slice[unsortedLength-1], slice[0]
-	}
-	return slice
-}
-
-func reverseSliceFloat64(slice []float64) []float64 {
-	var size int = len(slice)
-	for i := 0; i < size/2; i++ {
-		slice[i], slice[size-i-1] = slice[size-i-1], slice[i]
-	}
-	return slice
 }
