@@ -42,8 +42,8 @@ func HeapSortIntAsc(slice []int) []int {
 
 func reverseSliceInt(slice []int) []int {
 	var size int = len(slice)
-	for i := 0; i < size/2; i++ {
-		slice[i], slice[size-i] = slice[size-i], slice[i]
+	for i := 0; i < int(size/2); i++ {
+		slice[i], slice[size-i-1] = slice[size-i-1], slice[i]
 	}
 	return slice
 }
@@ -87,7 +87,7 @@ func HeapSortFloat64Asc(slice []float64) []float64 {
 func reverseSliceFloat64(slice []float64) []float64 {
 	var size int = len(slice)
 	for i := 0; i < size/2; i++ {
-		slice[i], slice[size-i] = slice[size-i], slice[i]
+		slice[i], slice[size-i-1] = slice[size-i-1], slice[i]
 	}
 	return slice
 }
