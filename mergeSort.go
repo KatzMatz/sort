@@ -147,3 +147,29 @@ func MergeSortFloat64Dsc(slice []float64) []float64 {
 	}
 
 }
+
+func MergeSortAsc(data SortInterface, startIdx int, endIdx int, dataSize int) {
+	var size int = endIdx - startIdx
+
+	if size > 1 {
+		// Split part
+		var midIdx int = size / 2
+		MergeSortAsc(data, 0, midIdx, midIdx)
+		MergeSortAsc(data, midIdx, size, size-midIdx)
+
+		// Merge part
+		var leftIdx int = 0
+		var rightIdx int = 0
+
+		for i := 0; i < size; i++ {
+			if (rightIdx == size-midIdx) || (leftIdx < midIdx && leftSlice[leftIdx] <= rightSlice[rightIdx]) {
+				sorted[i] = leftSlice[leftIdx]
+				leftIdx++
+			} else {
+				sorted[i] = rightSlice[rightIdx]
+				rightIdx++
+			}
+		}
+
+	}
+}

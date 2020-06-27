@@ -139,3 +139,35 @@ func QuickSortFloat64Dsc(slice []float64) []float64 {
 	}
 
 }
+
+func separatePivot(data SortInterface, startIdx int, endIdx int) int {
+
+}
+
+func QuickSortAsc(data SortInterface, startIdx, endIdx int) {
+	var size int = endIdx - startIdx
+	if size > 1 {
+		// var sorted []float64 = make([]float64, size)
+
+		var pivot float64 = slice[0]
+		var left []float64
+		var right []float64
+
+		for _, item := range slice[1:] {
+			if item <= pivot {
+				left = append(left, item)
+			} else {
+				right = append(right, item)
+			}
+		}
+		left = QuickSortFloat64Asc(left)
+		right = QuickSortFloat64Asc(right)
+
+		sorted = append(left, pivot)
+		sorted = append(sorted, right...)
+
+		return sorted
+	} else {
+		return slice
+	}
+}
