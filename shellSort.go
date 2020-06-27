@@ -4,102 +4,76 @@ import (
 	"strings"
 )
 
-func ShellSortInt(slice []int, ascOrDsc string) []int {
+func shellSortAsc(data SortInterface) {
+	var size = data.Len()
+
+	var h int = 1
+	for h < (size / 9) {
+		h = 3*h + 1
+	}
+
+	for ; h > 0; h = h / 3 {
+		for i := 1; i < size; i++ {
+			for key := i; (key >= h) && data.Less(key, key-h); key = key - h {
+				data.Swap(key, key-h)
+			}
+		}
+	}
+}
+
+func shellSortDsc(data SortInterface) {
+	var size = data.Len()
+
+	var h int = 1
+	for h < (size / 9) {
+		h = 3*h + 1
+	}
+
+	for ; h > 0; h = h / 3 {
+		for i := 1; i < size; i++ {
+			for key := i; (key >= h) && data.Less(key-h, key); key = key - h {
+				data.Swap(key, key-h)
+			}
+		}
+	}
+}
+
+func ShellSortInt(slice []int, ascOrDsc string) bool {
 	if strings.EqualFold("asc", ascOrDsc) {
-		return ShellSortIntAsc(slice)
+		ShellSortAscInt(slice)
+		return true
 	} else if strings.EqualFold("dsc", ascOrDsc) {
-		return ShellSortIntDsc(slice)
+		ShellSortDscInt(slice)
+		return true
 	} else {
-		return nil
+		return false
 	}
 }
 
-func ShellSortIntAsc(slice []int) []int {
-	var size = len(slice)
-
-	// decide h
-	var h int = 1
-	for h < (size / 9) {
-		h = 3*h + 1
-	}
-
-	for ; h > 0; h = h / 3 {
-		for i := 1; i < size; i++ {
-			for key := i; (key >= h) && (slice[key] < slice[key-h]); key = key - h {
-				slice[key], slice[key-h] = slice[key-h], slice[key]
-			}
-		}
-	}
-
-	return slice
-}
-
-func ShellSortIntDsc(slice []int) []int {
-	var size = len(slice)
-
-	// decide h
-	var h int = 1
-	for h < (size / 9) {
-		h = 3*h + 1
-	}
-
-	for ; h > 0; h = h / 3 {
-		for i := 1; i < size; i++ {
-			for key := i; (key >= h) && (slice[key] > slice[key-h]); key = key - h {
-				slice[key], slice[key-h] = slice[key-h], slice[key]
-			}
-		}
-	}
-
-	return slice
-}
-
-func ShellSortFloat64(slice []float64, ascOrDsc string) []float64 {
+func ShellSortFloat64(slice []float64, ascOrDsc string) bool {
 	if strings.EqualFold("asc", ascOrDsc) {
-		return ShellSortFloat64Asc(slice)
+		ShellSortAscFloat64(slice)
+		return true
 	} else if strings.EqualFold("dsc", ascOrDsc) {
-		return ShellSortFloat64Dsc(slice)
+		ShellSortDscFloat64(slice)
+		return true
 	} else {
-		return nil
+		return false
 	}
 }
 
-func ShellSortFloat64Asc(slice []float64) []float64 {
-	var size = len(slice)
-
-	// decide h
-	var h int = 1
-	for h < (size / 9) {
-		h = 3*h + 1
-	}
-
-	for ; h > 0; h = h / 3 {
-		for i := 1; i < size; i++ {
-			for key := i; (key >= h) && (slice[key] < slice[key-h]); key = key - h {
-				slice[key], slice[key-h] = slice[key-h], slice[key]
-			}
-		}
-	}
-
-	return slice
+func ShellSortAscInt(slice []int) {
+	shellSortAsc(IntSlice(slice))
 }
 
-func ShellSortFloat64Dsc(slice []float64) []float64 {
-	var size = len(slice)
+func ShellSortDscInt(slice []int) {
+	shellSortDsc(IntSlice(slice))
+}
 
-	// decide h
-	var h int = 1
-	for h < (size / 9) {
-		h = 3*h + 1
-	}
+func ShellSortAscFloat64(slice []float64) {
+	shellSortAsc(Float64Slice(slice))
+}
 
-	for ; h > 0; h = h / 3 {
-		for i := 1; i < size; i++ {
-			for key := i; (key >= h) && (slice[key] > slice[key-h]); key = key - h {
-				slice[key], slice[key-h] = slice[key-h], slice[key]
-			}
-		}
-	}
-
-	return slice
+func ShellSortDscFloat64(slice []float64) {
+	shellSortDsc(Float64Slice(slice))
 }
