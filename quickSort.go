@@ -29,9 +29,10 @@ func QuickSortFloat64(slice []float64, ascOrDsc string) bool {
 }
 
 func separateByPivotAsc(data SortInterface, startIdx int, endIdx int) int {
+	// pivot is data[endIdx]
 	var midIdx int = startIdx
 
-	for i := startIdx + 1; i < endIdx; i++ {
+	for i := startIdx; i < endIdx; i++ {
 		if data.Less(i, endIdx) {
 			data.Swap(i, midIdx)
 			midIdx++
@@ -44,7 +45,7 @@ func separateByPivotAsc(data SortInterface, startIdx int, endIdx int) int {
 func separateByPivotDsc(data SortInterface, startIdx int, endIdx int) int {
 	var midIdx int = startIdx
 
-	for i := startIdx + 1; i < endIdx; i++ {
+	for i := startIdx; i < endIdx; i++ {
 		if data.Less(endIdx, i) {
 			data.Swap(i, midIdx)
 			midIdx++
@@ -57,7 +58,7 @@ func separateByPivotDsc(data SortInterface, startIdx int, endIdx int) int {
 func quickSortAscSub(data SortInterface, startIdx int, endIdx int) {
 	if startIdx < endIdx {
 		pivotIdx := separateByPivotAsc(data, startIdx, endIdx)
-		quickSortAscSub(data, startIdx, pivotIdx)
+		quickSortAscSub(data, startIdx, pivotIdx-1)
 		quickSortAscSub(data, pivotIdx+1, endIdx)
 	}
 }
@@ -65,7 +66,7 @@ func quickSortAscSub(data SortInterface, startIdx int, endIdx int) {
 func quickSortDscSub(data SortInterface, startIdx int, endIdx int) {
 	if startIdx < endIdx {
 		pivotIdx := separateByPivotDsc(data, startIdx, endIdx)
-		quickSortDscSub(data, startIdx, pivotIdx)
+		quickSortDscSub(data, startIdx, pivotIdx-1)
 		quickSortDscSub(data, pivotIdx+1, endIdx)
 	}
 }

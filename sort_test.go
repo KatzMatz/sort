@@ -103,6 +103,9 @@ func TestQuickSortInt(t *testing.T) {
 
 	for i, v := range resultAsc {
 		if v != correctSliceIntAsc[i] {
+			t.Errorf("%d\n", sliceInt)
+			t.Errorf("%d\n", correctSliceIntAsc)
+			t.Errorf("%d\n", resultAsc)
 			t.Fatal("asc failed")
 		}
 	}
@@ -158,7 +161,9 @@ func TestReverseSliceInt(t *testing.T) {
 	reverseSliceInt(result)
 
 	for i, v := range result {
-		if v != correctSliceIntDsc[i] {
+		if v != sliceInt[len(sliceInt)-1-i] {
+			t.Errorf("%d\n", sliceInt)
+			t.Errorf("%d\n", result)
 			t.Fatal("failed")
 		}
 	}
