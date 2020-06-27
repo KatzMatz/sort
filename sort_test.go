@@ -199,3 +199,32 @@ func TestHeapSortInt(t *testing.T) {
 		t.Fatal("failed")
 	}
 }
+
+func TestShellSortInt(t *testing.T) {
+	resultAsc := make([]int, len(sliceInt))
+	copy(resultAsc, sliceInt)
+
+	ShellSortAscInt(resultAsc)
+
+	for i, v := range resultAsc {
+		if v != correctSliceIntAsc[i] {
+			t.Fatal("asc failed")
+		}
+	}
+
+	resultDsc := make([]int, len(sliceInt))
+	copy(resultDsc, sliceInt)
+
+	ShellSortDscInt(resultDsc)
+
+	for i, v := range resultDsc {
+		if v != correctSliceIntDsc[i] {
+			t.Fatal("dsc failed")
+		}
+	}
+
+	if ShellSortInt(resultDsc, "not asc or dsc") != false {
+		t.Fatal("failed")
+	}
+
+}
