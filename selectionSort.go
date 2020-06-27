@@ -4,98 +4,76 @@ import (
 	"strings"
 )
 
-func SelectionSortInt(slice []int, ascOrDsc string) []int {
-	if strings.EqualFold(ascOrDsc, "asc") {
-		return SelectionSortIntAsc(slice)
-	} else if strings.EqualFold(ascOrDsc, "dsc") {
-		return SelectionSortIntDsc(slice)
-	} else {
-		return nil
-	}
-}
-
-func SelectionSortIntAsc(slice []int) []int {
-	var size int = len(slice)
+func selectionSortAsc(data SortInterface) {
+	var size int = data.Len()
 
 	var minIdx int = 0
 	for i := 0; i < size; i++ {
 		minIdx = i
 		for j := i + 1; j < size; j++ {
-			if slice[minIdx] > slice[j] {
+			if data.Less(j, minIdx) {
 				minIdx = j
 			}
 		}
 		if minIdx != i {
-			slice[i], slice[minIdx] = slice[minIdx], slice[i]
+			data.Swap(i, minIdx)
 		}
 	}
-
-	return slice
 }
 
-func SelectionSortIntDsc(slice []int) []int {
-	var size int = len(slice)
+func selectionSortDsc(data SortInterface) {
+	var size int = data.Len()
 
 	var maxIdx int = 0
 	for i := 0; i < size; i++ {
 		maxIdx = i
 		for j := i + 1; j < size; j++ {
-			if slice[maxIdx] < slice[j] {
+			if data.Less(maxIdx, j) {
 				maxIdx = j
 			}
 		}
 		if maxIdx != i {
-			slice[i], slice[maxIdx] = slice[maxIdx], slice[i]
+			data.Swap(i, maxIdx)
 		}
 	}
-
-	return slice
 }
 
-func SelectionSortFloat64(slice []float64, ascOrDsc string) []float64 {
+func SelectionSortInt(slice []int, ascOrDsc string) bool {
 	if strings.EqualFold(ascOrDsc, "asc") {
-		return SelectionSortFloat64Asc(slice)
+		SelectionSortAscInt(slice)
+		return true
 	} else if strings.EqualFold(ascOrDsc, "dsc") {
-		return SelectionSortFloat64Dsc(slice)
+		SelectionSortDscInt(slice)
+		return true
 	} else {
-		return nil
+		return false
 	}
 }
 
-func SelectionSortFloat64Asc(slice []float64) []float64 {
-	var size int = len(slice)
-
-	var minIdx int = 0
-	for i := 0; i < size; i++ {
-		minIdx = i
-		for j := i + 1; j < size; j++ {
-			if slice[minIdx] > slice[j] {
-				minIdx = j
-			}
-		}
-		if minIdx != i {
-			slice[i], slice[minIdx] = slice[minIdx], slice[i]
-		}
+func SelectionSortFloat64(slice []float64, ascOrDsc string) bool {
+	if strings.EqualFold(ascOrDsc, "asc") {
+		SelectionSortAscFloat64(slice)
+		return true
+	} else if strings.EqualFold(ascOrDsc, "dsc") {
+		SelecitonSortDscFloat64(slice)
+		return true
+	} else {
+		return false
 	}
-
-	return slice
 }
 
-func SelectionSortFloat64Dsc(slice []float64) []float64 {
-	var size int = len(slice)
+func SelectionSortAscInt(slice []int) {
+	selectionSortAsc(IntSlice(slice))
+}
 
-	var maxIdx int = 0
-	for i := 0; i < size; i++ {
-		maxIdx = i
-		for j := i + 1; j < size; j++ {
-			if slice[maxIdx] < slice[j] {
-				maxIdx = j
-			}
-		}
-		if maxIdx != i {
-			slice[i], slice[maxIdx] = slice[maxIdx], slice[i]
-		}
-	}
+func SelectionSortDscInt(slice []int) {
+	selectionSortDsc(IntSlice(slice))
+}
 
-	return slice
+func SelectionSortAscFloat64(slice []float64) {
+	selectionSortAsc(Float64Slice(slice))
+}
+
+func SelecitonSortDscFloat64(slice []float64) {
+	selectionSortDsc(Float64Slice(slice))
 }

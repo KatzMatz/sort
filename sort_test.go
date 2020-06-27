@@ -228,3 +228,27 @@ func TestShellSortInt(t *testing.T) {
 	}
 
 }
+
+func TestSelectionSortInt(t *testing.T) {
+	resultAsc := make([]int, len(sliceInt))
+	copy(resultAsc, sliceInt)
+
+	SelectionSortAscInt(resultAsc)
+
+	if isSortedAscInt(resultAsc) == false {
+		t.Fatal("asc failed")
+	}
+
+	resultDsc := make([]int, len(sliceInt))
+	copy(resultDsc, sliceInt)
+
+	SelectionSortDscInt(resultDsc)
+
+	if isSortedDscInt(resultDsc) == false {
+		t.Fatal("dsc failed")
+	}
+
+	if SelectionSortInt(resultAsc, "not asc or dsc") != false {
+		t.Fatal("failed")
+	}
+}
