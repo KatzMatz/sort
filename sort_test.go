@@ -14,7 +14,10 @@ var correctSliceFloat64Dsc []float64 = []float64{9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3
 
 func TestBubbleSortIntAsc(t *testing.T) {
 
-	result := BubbleSortIntAsc(sliceInt)
+	result := make([]int, len(sliceInt))
+	copy(result, sliceInt)
+
+	BubbleSortIntAsc(result)
 
 	for i, v := range result {
 		if v != correctSliceIntAsc[i] {
@@ -25,7 +28,10 @@ func TestBubbleSortIntAsc(t *testing.T) {
 }
 
 func TestBubbleSortIntDsc(t *testing.T) {
-	result := BubbleSortIntDsc(sliceInt)
+	result := make([]int, len(sliceInt))
+	copy(result, sliceInt)
+
+	BubbleSortIntDsc(result)
 
 	for i, v := range result {
 		if v != correctSliceIntDsc[i] {
@@ -35,7 +41,10 @@ func TestBubbleSortIntDsc(t *testing.T) {
 }
 
 func TestBubbleSortInt(t *testing.T) {
-	resultAsc := BubbleSortInt(sliceInt, "asc")
+	resultAsc := make([]int, len(sliceInt))
+	copy(resultAsc, sliceInt)
+
+	BubbleSortInt(resultAsc, "asc")
 
 	for i, v := range resultAsc {
 		if v != correctSliceIntAsc[i] {
@@ -43,7 +52,9 @@ func TestBubbleSortInt(t *testing.T) {
 		}
 	}
 
-	resultDsc := BubbleSortInt(sliceInt, "dsc")
+	resultDsc := make([]int, len(sliceInt))
+	copy(resultDsc, sliceInt)
+	BubbleSortInt(resultDsc, "dsc")
 
 	for i, v := range resultDsc {
 		if v != correctSliceIntDsc[i] {
@@ -51,13 +62,16 @@ func TestBubbleSortInt(t *testing.T) {
 		}
 	}
 
-	if BubbleSortInt(sliceInt, "not asc or dsc") != nil {
+	if BubbleSortInt(sliceInt, "not asc or dsc") != false {
 		t.Fatal("failed")
 	}
 }
 
 func TestBubbleSortFloat(t *testing.T) {
-	resultAsc := BubbleSortFloat64(sliceFloat64, "asc")
+	resultAsc := make([]float64, len(sliceFloat64))
+	copy(resultAsc, sliceFloat64)
+
+	BubbleSortFloat64(resultAsc, "asc")
 
 	for i, v := range resultAsc {
 		if v != correctSliceFloat64Asc[i] {
@@ -65,7 +79,10 @@ func TestBubbleSortFloat(t *testing.T) {
 		}
 	}
 
-	resultDsc := BubbleSortFloat64(sliceFloat64, "dsc")
+	resultDsc := make([]float64, len(sliceFloat64))
+	copy(resultDsc, sliceFloat64)
+
+	BubbleSortFloat64(resultDsc, "dsc")
 
 	for i, v := range resultDsc {
 		if v != correctSliceFloat64Dsc[i] {
@@ -73,13 +90,16 @@ func TestBubbleSortFloat(t *testing.T) {
 		}
 	}
 
-	if BubbleSortFloat64(sliceFloat64, "not asc or dsc") != nil {
+	if BubbleSortFloat64(sliceFloat64, "not asc or dsc") != false {
 		t.Fatal("failed")
 	}
 }
 
 func TestQuickSortInt(t *testing.T) {
-	resultAsc := QuickSortInt(sliceInt, "asc")
+	resultAsc := make([]int, len(sliceInt))
+	copy(resultAsc, sliceInt)
+
+	QuickSortInt(resultAsc, "asc")
 
 	for i, v := range resultAsc {
 		if v != correctSliceIntAsc[i] {
@@ -87,7 +107,10 @@ func TestQuickSortInt(t *testing.T) {
 		}
 	}
 
-	resultDsc := QuickSortInt(sliceInt, "dsc")
+	resultDsc := make([]int, len(sliceInt))
+	copy(resultDsc, sliceInt)
+
+	QuickSortInt(resultDsc, "dsc")
 
 	for i, v := range resultDsc {
 		if v != correctSliceIntDsc[i] {
@@ -95,13 +118,16 @@ func TestQuickSortInt(t *testing.T) {
 		}
 	}
 
-	if QuickSortInt(sliceInt, "not asc or dsc") != nil {
+	if QuickSortInt(sliceInt, "not asc or dsc") != false {
 		t.Fatal("failed")
 	}
 }
 
 func TestQuickSortFloat(t *testing.T) {
-	resultAsc := QuickSortFloat64(sliceFloat64, "asc")
+	resultAsc := make([]float64, len(sliceFloat64))
+	copy(resultAsc, sliceFloat64)
+
+	QuickSortFloat64(resultAsc, "asc")
 
 	for i, v := range resultAsc {
 		if v != correctSliceFloat64Asc[i] {
@@ -109,7 +135,10 @@ func TestQuickSortFloat(t *testing.T) {
 		}
 	}
 
-	resultDsc := QuickSortFloat64(sliceFloat64, "dsc")
+	resultDsc := make([]float64, len(sliceFloat64))
+	copy(resultDsc, sliceFloat64)
+
+	QuickSortFloat64(resultDsc, "dsc")
 
 	for i, v := range resultDsc {
 		if v != correctSliceFloat64Dsc[i] {
@@ -117,13 +146,16 @@ func TestQuickSortFloat(t *testing.T) {
 		}
 	}
 
-	if QuickSortFloat64(sliceFloat64, "not asc or dsc") != nil {
+	if QuickSortFloat64(sliceFloat64, "not asc or dsc") != false {
 		t.Fatal("failed")
 	}
 }
 
 func TestReverseSliceInt(t *testing.T) {
-	result := reverseSliceInt(correctSliceIntAsc)
+	result := make([]int, len(sliceInt))
+	copy(result, sliceInt)
+
+	reverseSliceInt(result)
 
 	for i, v := range result {
 		if v != correctSliceIntDsc[i] {
@@ -133,7 +165,9 @@ func TestReverseSliceInt(t *testing.T) {
 }
 
 func TestHeapSortInt(t *testing.T) {
-	resultAsc := HeapSortInt(sliceInt, "asc")
+	resultAsc := make([]int, len(sliceInt))
+	copy(resultAsc, sliceInt)
+	HeapSortInt(resultAsc, "asc")
 
 	for i, v := range resultAsc {
 		if v != correctSliceIntAsc[i] {
@@ -146,7 +180,9 @@ func TestHeapSortInt(t *testing.T) {
 		}
 	}
 
-	resultDsc := HeapSortInt(sliceInt, "dsc")
+	resultDsc := make([]int, len(sliceInt))
+	copy(resultDsc, sliceInt)
+	HeapSortInt(resultDsc, "dsc")
 
 	for i, v := range resultDsc {
 		if v != correctSliceIntDsc[i] {
@@ -154,30 +190,7 @@ func TestHeapSortInt(t *testing.T) {
 		}
 	}
 
-	if HeapSortInt(sliceInt, "not asc or dsc") != nil {
+	if HeapSortInt(sliceInt, "not asc or dsc") != false {
 		t.Fatal("failed")
 	}
-}
-
-func TestHeapSortFloat64(t *testing.T) {
-	resultAsc := HeapSortFloat64(sliceFloat64, "asc")
-
-	for i, v := range resultAsc {
-		if v != correctSliceFloat64Asc[i] {
-			t.Fatal("asc failed")
-		}
-	}
-
-	resultDsc := HeapSortFloat64(sliceFloat64, "dsc")
-
-	for i, v := range resultDsc {
-		if v != correctSliceFloat64Dsc[i] {
-			t.Fatal("dsc failed")
-		}
-	}
-
-	if HeapSortFloat64(sliceFloat64, "not asc or dsc") != nil {
-		t.Fatal("Failed")
-	}
-
 }
