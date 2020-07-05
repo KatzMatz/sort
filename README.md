@@ -13,7 +13,7 @@
 var slice = []int{2,3,4,1}
 sort.BubbleSortAscInt(slice) // => [1, 2, 3, 4]
 // or
-// sort.BubbleSortAscInt(slice, "asc")
+// sort.BubbleSortInt(slice, "asc")
 ```
 
 ```go
